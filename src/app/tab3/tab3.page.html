@@ -1,0 +1,26 @@
+ 
+
+<ion-content >
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col  ><h3>Favoritos</h3></ion-col>
+     </ion-row>
+  </ion-grid>
+
+<!-- <app-slideshow-poster [peliculas]="peliculas"></app-slideshow-poster> -->
+ 
+
+<div *ngFor="let favPeli of favoritosPelis">
+  <ion-grid *ngIf="favPeli.pelis.length">
+    <ion-row >
+      <ion-col>
+       <h4>{{ favPeli.genero}}</h4>   
+      </ion-col>
+    </ion-row>
+    <app-slideshow-poster (carga)="carga($event)" [peliculas]="favPeli.pelis"></app-slideshow-poster>
+
+  </ion-grid>
+  <!-- <app-slideshow-poster  [genero]="genero.name" [peliculas]="peliculas"></app-slideshow-poster> -->
+</div>
+
+</ion-content>

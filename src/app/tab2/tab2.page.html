@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+Buscar Película
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+<ion-searchbar placeholder="Buscar película" 
+                animated debounce="700"
+                [value]="testoBuscar"
+                (ionChange)="buscar($event)">
+</ion-searchbar>
+</ion-toolbar>
+
+
+<ion-content >
+
+
+<ion-grid *ngIf="buscando">
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-col>
+   </ion-row>
+</ion-grid>
+
+
+  <ion-list *ngIf=" peliculas.total_results===undefined || peliculas.total_results===0">
+    <ion-list-header>
+      <ion-label>{{buscando}}</ion-label>
+      <ion-label>Ideas</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let idea of ideas">
+      <ion-label color="primary"
+                 (click)="testoBuscar = idea">
+                 {{idea}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="6" 
+             *ngFor="let pelicula of peliculas.results"
+             (click)="verDetalle(pelicula.id)">
+      <ion-card>
+        <img [src]="pelicula.poster_path | imagen" alt="">
+        <ion-card-header>
+          <ion-card-subtitle>{{pelicula.release_date}}</ion-card-subtitle>
+          <ion-card-title>{{pelicula.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <h2>{{pelicula.vote_count}}</h2>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+   </ion-row>
+</ion-grid>
+
+ </ion-content>
